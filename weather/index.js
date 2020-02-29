@@ -9,6 +9,7 @@ const HOST = "0.0.0.0";
 // App
 const app = express();
 app.get("/", (req, res) => {
+  console.log(req.headers);
   res.send("I'm the main container!");
 });
 
