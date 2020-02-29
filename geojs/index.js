@@ -9,7 +9,7 @@ const HOST = "0.0.0.0";
 // App
 const app = express();
 app.get("/", (req, res) => {
-  res.send("I'm the GeoJS ambassador container!");
+  res.send("I'm the GeoJS API ambassador container!");
 });
 
 app.get("/healthz", (req, res) => {
