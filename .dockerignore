@@ -1,2 +1,8 @@
+.git
+.github
+.gitignore
+LICENSE
+README.md
+VERSION
 node_modules
 npm-debug.log
