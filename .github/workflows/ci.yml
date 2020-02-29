@@ -10,9 +10,9 @@ jobs:
 
     steps:
     - name: Log in to Docker registry
-      run: docker login -u $GITHUB_ACTOR -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
+      run: docker login -u ericcrews -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag docker.pkg.github.com/ecrews/weather/server:$GITHUB_SHA
+      run: docker build . --file Dockerfile --tag ericcrews/weather:$GITHUB_SHA
     - name: Push the Docker image
-      run: docker push docker.pkg.github.com/ecrews/weather/server:$GITHUB_SHA
+      run: docker push ericcrews/weather:$GITHUB_SHA
