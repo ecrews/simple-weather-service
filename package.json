@@ -2,7 +2,7 @@
   "name": "weather",
   "version": "0.1.0",
   "description": "Current local weather and forecast based on IP",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
