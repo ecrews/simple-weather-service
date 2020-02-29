@@ -8,11 +8,14 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      SHA8: ${GITHUB_SHA::8}
+
     steps:
     - name: Log in to Docker registry
       run: docker login -u ericcrews -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ericcrews/weather:$GITHUB_SHA
+      run: docker build . --file Dockerfile --tag ericcrews/weather:$SHA8
     - name: Push the Docker image
-      run: docker push ericcrews/weather:$GITHUB_SHA
+      run: docker push ericcrews/weather:$SHA8
