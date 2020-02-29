@@ -1,11 +1,14 @@
 name: Docker Image CI
 
-on: [push]
+on:
+  push:
+    paths:
+    - '**.js'
+    - 'Dockerfile'
+    - 'package.json'
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
