@@ -16,14 +16,14 @@ jobs:
     - name: Log in to Docker registry
       run: docker login -u ericcrews -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
     - name: Build geojs image
-      run: docker build ./geojs --tag ericcrews/geojs:${GITHUB_SHA::8}
+      run: docker build ./geojs --tag ericcrews/geojs:${GITHUB_SHA::7}
     - name: Push geojs image
-      run: docker push ericcrews/geojs:${GITHUB_SHA::8}
+      run: docker push ericcrews/geojs:${GITHUB_SHA::7}
     - name: Build openweathermap image
-      run: docker build ./openweathermap --tag ericcrews/openweathermap:${GITHUB_SHA::8}
+      run: docker build ./openweathermap --tag ericcrews/openweathermap:${GITHUB_SHA::7}
     - name: Push openweathermap image
-      run: docker push ericcrews/openweathermap:${GITHUB_SHA::8}
+      run: docker push ericcrews/openweathermap:${GITHUB_SHA::7}
     - name: Build weather image
-      run: docker build ./weather --tag ericcrews/weather:${GITHUB_SHA::8}
+      run: docker build ./weather --tag ericcrews/weather:${GITHUB_SHA::7}
     - name: Push weather image
-      run: docker push ericcrews/weather:${GITHUB_SHA::8}
+      run: docker push ericcrews/weather:${GITHUB_SHA::7}
