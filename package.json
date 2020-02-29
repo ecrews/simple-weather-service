@@ -17,9 +17,10 @@
   },
   "homepage": "https://github.com/ecrews/weather#readme",
   "dependencies": {
-    "express": "4.17.1"
+    "express": "^4.17.1"
   },
   "devDependencies": {
-    "prettier": "1.19.1"
+    "eslint": "^6.8.0",
+    "prettier": "^1.19.1"
   }
 }
