@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Log in to Docker registry
+      run: docker login -u ecrews -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag docker.pkg.github.com/ecrews/weather/server:github.sha
