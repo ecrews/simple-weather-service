@@ -1,0 +1,28 @@
+{
+  "name": "openweathermap",
+  "version": "0.1.0",
+  "description": "Ambassador container to the OpenWeatherMap Weather API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecrews/weather.git"
+  },
+  "author": "Eric Crews",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ecrews/weather/issues"
+  },
+  "homepage": "https://github.com/ecrews/weather#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  }
+}

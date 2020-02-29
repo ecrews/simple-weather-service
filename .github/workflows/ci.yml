@@ -3,20 +3,27 @@ name: Docker Image CI
 on:
   push:
     paths:
-    - '**.js'
-    - '.dockerignore'
-    - 'Dockerfile'
-    - 'package.json'
+    - 'geojs/**'
+    - 'openweathermap/**'
+    - 'weather/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
     - name: Log in to Docker registry
       run: docker login -u ericcrews -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ericcrews/weather:${GITHUB_SHA::8}
-    - name: Push the Docker image
+    - name: Build geojs image
+      run: docker build ./geojs --tag ericcrews/geojs:${GITHUB_SHA::8}
+    - name: Push geojs image
+      run: docker push ericcrews/geojs:${GITHUB_SHA::8}
+    - name: Build openweathermap image
+      run: docker build ./openweathermap --tag ericcrews/openweathermap:${GITHUB_SHA::8}
+    - name: Push openweathermap image
+      run: docker push ericcrews/openweathermap:${GITHUB_SHA::8}
+    - name: Build weather image
+      run: docker build ./weather --tag ericcrews/weather:${GITHUB_SHA::8}
+    - name: Push weather image
       run: docker push ericcrews/weather:${GITHUB_SHA::8}
