@@ -18,7 +18,7 @@ var instance = axios.create({
 
 app.get("/", async (req, res, next) => {
   try {
-    let geo_res = await instance.get(`/ip/geo/${req.query.ip}.json`);
+    let geo_res = await instance.get(`/ip/${req.query.ip}.json`);
     res.send(geo_res.data);
   } catch (err) {
     next(err);
