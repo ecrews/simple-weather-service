@@ -2,7 +2,7 @@
 
 const axios = require("axios");
 const express = require("express");
-require('express-async-errors');
+require("express-async-errors");
 
 // Constants
 const PORT = parseInt(process.env.PORT);
