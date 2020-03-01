@@ -12,7 +12,7 @@ const app = express();
 app.get("/", async (req, res, next) => {
   try {
   let geo = await axios.get(`https://get.geojs.io/v1/ip/geo/${req.query.ip}.json`);
-  res.send(geo_data);
+  res.send(geo.data);
   } catch (err) {
     next(err);
   }
