@@ -1,15 +1,18 @@
 "use strict";
 
+const axios = require("axios");
 const express = require("express");
 
 // Constants
 const PORT = 5050;
 const HOST = "0.0.0.0";
+const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
 
 // App
 const app = express();
 app.get("/", (req, res) => {
-  res.send("I'm the OpenWeatherMap ambassador container!");
+  let weather_data = await axios.get(`api.openweathermap.org/data/2.5/weather?lat=${req.query.lat}&lon=${req.query.lon}&appid=${OPENWEATHER_API_KEY}`);
+  res.send(weather_data);
 });
 
 app.get("/healthz", (req, res) => {

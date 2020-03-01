@@ -1,5 +1,6 @@
 "use strict";
 
+const axios = require("axios");
 const express = require("express");
 
 // Constants
@@ -9,7 +10,8 @@ const HOST = "0.0.0.0";
 // App
 const app = express();
 app.get("/", (req, res) => {
-  res.send("I'm the GeoJS API ambassador container!");
+  let geo_data = await axios.get(`https://get.geojs.io/v1/ip/geo/${req.query.ip}.json`);
+  res.send(geodata);
 });
 
 app.get("/healthz", (req, res) => {
