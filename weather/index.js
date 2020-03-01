@@ -25,5 +25,19 @@ app.get("/healthz", (req, res) => {
   res.send("ok");
 });
 
+app.get("*", function(req, res, next) {
+  let err = new Error(`${req.ip} tried to reach ${req.originalUrl}`);
+  err.statusCode = 404;
+  next(err);
+});
+
+app.use(function(err, req, res, next) {
+  console.log(err.message);
+  if (!err.statusCode) {
+    err.statusCode = 500;
+  }
+  res.status(err.statusCode).send(err.message);
+}
+
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
