@@ -30,13 +30,15 @@ app.get("/healthz", (req, res) => {
 });
 
 app.get("*", function(req, res, next) {
-  let err = new Error(`${req.ip} tried to reach ${req.originalUrl}`);
+  let err = new Error(
+    `${req.header("x-forwarded-for")} tried to reach ${req.originalUrl}`
+  );
   err.statusCode = 404;
   next(err);
 });
 
 app.use(function(err, req, res, next) {
-  console.log(err);
+  console.error(err);
   if (!err.statusCode) {
     err.statusCode = 500;
   }
