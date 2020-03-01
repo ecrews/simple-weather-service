@@ -12,7 +12,7 @@ const HOST = "0.0.0.0";
 const app = express();
 
 // Set GeoJS API base URL
-var instance = axios.create({
+const instance = axios.create({
   baseURL: "https://get.geojs.io/v1"
 });
 

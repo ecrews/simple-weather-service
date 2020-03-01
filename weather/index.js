@@ -1,7 +1,6 @@
 "use strict";
 
 const axios = require("axios");
-const axiosLogger = require("axios-logger");
 const express = require("express");
 require('express-async-errors');
 
@@ -14,7 +13,6 @@ const OPENWEATHERMAP_SERVICE_HOST = process.env.OPENWEATHERMAP_SERVICE_HOST;
 // App
 const app = express();
 const instance = axios.create();
-instance.interceptors.request.use(axiosLogger.requestLogger, axiosLogger.errorLogger);
 
 app.get("/", async (req, res, next) => {
   try {

@@ -13,7 +13,7 @@ const API_KEY = process.env.API_KEY;
 const app = express();
 
 // Set OpenWeatherMap API base URL
-var instance = axios.create({
+const instance = axios.create({
   baseURL: "https://api.openweathermap.org/data/2.5"
 });
 
