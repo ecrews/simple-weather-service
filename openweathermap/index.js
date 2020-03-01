@@ -20,14 +20,18 @@ instance.interceptors.request.use(function(config) {
   return config;
 });
 
-app.get("/", async (req, res) => {
-  let weather = await instance.get("/weather", {
-    params: {
-      lat: req.query.lat,
-      lon: req.query.lon
-    }
-  });
-  res.send(weather.data);
+app.get("/", async (req, res, next) => {
+  try {
+    let weather = await instance.get("/weather", {
+      params: {
+        lat: req.query.lat,
+        lon: req.query.lon
+      }
+    });
+    res.send(weather.data);
+  } catch (err) {
+    next(err);
+  }
 });
 
 app.get("/healthz", (req, res) => {
