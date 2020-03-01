@@ -15,7 +15,7 @@ var instance = axios.create({
   baseURL: "https://api.openweathermap.org/data/2.5"
 });
 
-axios.interceptors.request.use(function(config) {
+instance.interceptors.request.use(function(config) {
   config.params.appid = API_KEY;
   return config;
 });
