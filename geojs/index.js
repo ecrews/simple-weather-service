@@ -11,7 +11,6 @@ const HOST = "0.0.0.0";
 const app = express();
 app.get("/", async (req, res) => {
   let geo = await axios.get(`https://get.geojs.io/v1/ip/geo/${req.query.ip}.json`);
-  console.log(geo.data);
   res.send(geo.data);
 });
 
