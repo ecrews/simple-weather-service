@@ -12,9 +12,9 @@ const OPENWEATHERMAP_URL = "http://localhost:5050";
 // App
 const app = express();
 app.get("/", async (req, res) => {
-  let geo_data = await axios.get(`${GEOJS_URL}?ip=${req.header('x-forwarded-for')}`);
-  let weather_data = await axios.get(`${OPENWEATHERMAP_URL}?lat=${geo_data.latitude}&lon=${geo_data.longitude}`);
-  res.send(weather_data);
+  let geo = await axios.get(`${GEOJS_URL}?ip=${req.header('x-forwarded-for')}`);
+  let weather = await axios.get(`${OPENWEATHERMAP_URL}?lat=${geo.data.latitude}&lon=${geo.data.longitude}`);
+  res.send(weather.data);
 });
 
 app.get("/healthz", (req, res) => {
