@@ -11,8 +11,12 @@ const HOST = "0.0.0.0";
 const app = express();
 app.get("/", async (req, res, next) => {
   try {
-  let geo = await axios.get(`https://get.geojs.io/v1/ip/geo/${req.query.ip}.json`);
-  res.send(geo.data);
+    let geo = await axios.get(`https://get.geojs.io/v1/ip/geo/geo.json`, {
+      params: {
+        ip: req.query.ip
+      }
+    });
+    res.send(geo.data);
   } catch (err) {
     next(err);
   }
@@ -20,6 +24,25 @@ app.get("/", async (req, res, next) => {
 
 app.get("/healthz", (req, res) => {
   res.send("ok");
+});
+
+app.get("*", function(req, res, next) {
+  let err = new Error(
+    `${req.header("x-forwarded-for")} tried to reach ${req.originalUrl}`
+  );
+  err.statusCode = 404;
+  next(err);
+});
+
+app.use(function(err, req, res, next) {
+  if (err.isAxiosError) {
+    err = err.toJSON();
+  }
+  console.log(err);
+  if (!err.statusCode) {
+    err.statusCode = 500;
+  }
+  res.status(err.statusCode).send(err.message);
 });
 
 app.listen(PORT, HOST);
