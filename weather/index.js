@@ -36,7 +36,7 @@ app.get("*", function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
-  console.log(err.message);
+  console.log(err);
   if (!err.statusCode) {
     err.statusCode = 500;
   }
