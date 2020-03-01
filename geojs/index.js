@@ -9,9 +9,13 @@ const HOST = "0.0.0.0";
 
 // App
 const app = express();
-app.get("/", async (req, res) => {
+app.get("/", async (req, res, next) => {
+  try {
   let geo = await axios.get(`https://get.geojs.io/v1/ip/geo/${req.query.ip}.json`);
-  res.send(geo.data);
+  res.send(geo_data);
+  } catch (err) {
+    next(err);
+  }
 });
 
 app.get("/healthz", (req, res) => {
