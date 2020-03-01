@@ -12,10 +12,12 @@ const API_KEY = process.env.API_KEY;
 const app = express();
 
 var instance = axios.create({
-  baseURL: "https://api.openweathermap.org/data/2.5",
-  params: {
-    appid: API_KEY
-  }
+  baseURL: "https://api.openweathermap.org/data/2.5"
+});
+
+axios.interceptors.request.use(function(config) {
+  config.params.appid = API_KEY;
+  return config;
 });
 
 app.get("/", async (req, res) => {
