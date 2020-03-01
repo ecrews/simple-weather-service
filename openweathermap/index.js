@@ -10,7 +10,7 @@ const HOST = "0.0.0.0";
 // App
 const app = express();
 app.get("/", async (req, res) => {
-  let weather = await axios.get("api.openweathermap.org/data/2.5/weather}");
+  let weather = await axios.get("api.openweathermap.org/data/2.5/weather");
   res.send(weather.data);
 });
 
