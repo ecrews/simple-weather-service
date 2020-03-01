@@ -18,7 +18,6 @@
   "homepage": "https://github.com/ecrews/weather#readme",
   "dependencies": {
     "axios": "^0.19.2",
-    "axios-logger": "^2.3.1",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1"
   },
