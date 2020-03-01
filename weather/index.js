@@ -1,5 +1,6 @@
 "use strict";
 
+const axios = require("axios");
 const express = require("express");
 
 // Constants
@@ -10,7 +11,8 @@ const HOST = "0.0.0.0";
 const app = express();
 app.get("/", (req, res) => {
   console.log(req.headers);
-  res.send("I'm the main container!");
+  let geo_res = await axios.get("http://localhost:4040");
+  res.send(geo_res);
 });
 
 app.get("/healthz", (req, res) => {
