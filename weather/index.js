@@ -13,12 +13,15 @@ const OPENWEATHERMAP_SERVICE_HOST = process.env.OPENWEATHERMAP_SERVICE_HOST;
 const app = express();
 app.get("/", async (req, res, next) => {
   try {
-    let geo = await axios.get(
-      `${GEOJS_SERVICE_HOST}?ip=${req.header("x-forwarded-for")}`
-    );
-    let weather = await axios.get(
-      `${OPENWEATHERMAP_SERVICE_HOST}?lat=${geo.data.latitude}&lon=${geo.data.longitude}`
-    );
+    let geo = await axios.get(GEOJS_SERVICE_HOST, {
+      params: { ip: req.header("x-forwarded-for") }
+    });
+    let weather = await axios.get(OPENWEATHERMAP_SERVICE_HOST, {
+      params: {
+        lat: geo.data.latitude,
+        lon: geo.data.longitude
+      }
+    });
     res.send(weather.data);
   } catch (err) {
     next(err);
