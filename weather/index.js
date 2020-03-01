@@ -11,18 +11,19 @@ const OPENWEATHERMAP_SERVICE_HOST = process.env.OPENWEATHERMAP_SERVICE_HOST;
 
 // App
 const app = express();
+
 app.get("/", async (req, res, next) => {
   try {
-    let geo = await axios.get(GEOJS_SERVICE_HOST, {
+    let geo_res = await axios.get(GEOJS_SERVICE_HOST, {
       params: { ip: req.header("x-forwarded-for") }
     });
-    let weather = await axios.get(OPENWEATHERMAP_SERVICE_HOST, {
+    let weather_res = await axios.get(OPENWEATHERMAP_SERVICE_HOST, {
       params: {
-        lat: geo.data.latitude,
-        lon: geo.data.longitude
+        lat: geo_res.data.latitude,
+        lon: geo_res.data.longitude
       }
     });
-    res.send(weather.data);
+    res.send(weather_res.data);
   } catch (err) {
     next(err);
   }
@@ -32,6 +33,7 @@ app.get("/healthz", (req, res) => {
   res.send("ok");
 });
 
+// Catch-all for undefined routes
 app.get("*", function(req, res, next) {
   let err = new Error(
     `${req.header("x-forwarded-for")} tried to reach ${req.originalUrl}`
@@ -40,6 +42,7 @@ app.get("*", function(req, res, next) {
   next(err);
 });
 
+// Generic error handler
 app.use(function(err, req, res, next) {
   if (err.isAxiosError) {
     err = err.toJSON();

@@ -10,14 +10,15 @@ const HOST = "0.0.0.0";
 // App
 const app = express();
 
+// Set GeoJS API base URL
 var instance = axios.create({
   baseURL: "https://get.geojs.io/v1"
 });
 
 app.get("/", async (req, res, next) => {
   try {
-    let geo = await instance.get(`/ip/geo/${req.query.ip}.json`);
-    res.send(geo.data);
+    let geo_res = await instance.get(`/ip/geo/${req.query.ip}.json`);
+    res.send(geo_res.data);
   } catch (err) {
     next(err);
   }
@@ -27,6 +28,7 @@ app.get("/healthz", (req, res) => {
   res.send("ok");
 });
 
+// Catch-all for undefined routes
 app.get("*", function(req, res, next) {
   let err = new Error(
     `${req.header("x-forwarded-for")} tried to reach ${req.originalUrl}`
@@ -35,6 +37,7 @@ app.get("*", function(req, res, next) {
   next(err);
 });
 
+// Generic error handler
 app.use(function(err, req, res, next) {
   if (err.isAxiosError) {
     err = err.toJSON();
