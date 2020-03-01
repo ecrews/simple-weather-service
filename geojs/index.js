@@ -4,7 +4,7 @@ const axios = require("axios");
 const express = require("express");
 
 // Constants
-const PORT = 4040;
+const PORT = parseInt(process.env.PORT);
 const HOST = "0.0.0.0";
 
 // App

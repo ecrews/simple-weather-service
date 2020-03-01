@@ -4,20 +4,20 @@ const axios = require("axios");
 const express = require("express");
 
 // Constants
-const PORT = 3030;
+const PORT = parseInt(process.env.PORT);
 const HOST = "0.0.0.0";
-const GEOJS_URL = "http://localhost:4040";
-const OPENWEATHERMAP_URL = "http://localhost:5050";
+const GEOJS_SERVICE_HOST = process.env.GEOJS_SERVICE_HOST;
+const OPENWEATHERMAP_SERVICE_HOST = process.env.OPENWEATHERMAP_SERVICE_HOST;
 
 // App
 const app = express();
 app.get("/", async (req, res, next) => {
   try {
     let geo = await axios.get(
-      `${GEOJS_URL}?ip=${req.header("x-forwarded-for")}`
+      `${GEOJS_SERVICE_HOST}?ip=${req.header("x-forwarded-for")}`
     );
     let weather = await axios.get(
-      `${OPENWEATHERMAP_URL}?lat=${geo.data.latitude}&lon=${geo.data.longitude}`
+      `${OPENWEATHERMAP_SERVICE_HOST}?lat=${geo.data.latitude}&lon=${geo.data.longitude}`
     );
     res.send(weather.data);
   } catch (err) {
