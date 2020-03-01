@@ -21,6 +21,7 @@ app.get("/", async (req, res, next) => {
         ip: req.query.ip
       }
     });
+    console.log(geo.data);
     res.send(geo.data);
   } catch (err) {
     next(err);

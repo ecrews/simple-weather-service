@@ -22,6 +22,7 @@ instance.interceptors.request.use(function(config) {
 
 app.get("/", async (req, res, next) => {
   try {
+    console.log(instance.config.params);
     let weather = await instance.get("/weather", {
       params: {
         lat: req.query.lat,

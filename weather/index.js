@@ -16,6 +16,7 @@ app.get("/", async (req, res, next) => {
     let geo = await axios.get(GEOJS_SERVICE_HOST, {
       params: { ip: req.header("x-forwarded-for") }
     });
+    console.log(geo.data);
     let weather = await axios.get(OPENWEATHERMAP_SERVICE_HOST, {
       params: {
         lat: geo.data.latitude,
