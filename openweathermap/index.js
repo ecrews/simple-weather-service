@@ -6,13 +6,11 @@ const express = require("express");
 // Constants
 const PORT = 5050;
 const HOST = "0.0.0.0";
-const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
 
 // App
 const app = express();
 app.get("/", async (req, res) => {
-  console.log(req);
-  let weather = await axios.get(`api.openweathermap.org/data/2.5/weather?lat=${req.query.lat}&lon=${req.query.lon}&appid=${OPENWEATHER_API_KEY}`);
+  let weather = await axios.get("api.openweathermap.org/data/2.5/weather}");
   res.send(weather.data);
 });
 
