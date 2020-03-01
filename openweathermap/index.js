@@ -11,21 +11,20 @@ const API_KEY = process.env.API_KEY;
 // App
 const app = express();
 
-axios.interceptors.request.use(function(config) {
-  config.params.appid = API_KEY;
-  return config;
+var instance = axios.create({
+  baseURL: "https://api.openweathermap.org/data/2.5",
+  params: {
+    appid: API_KEY
+  }
 });
 
 app.get("/", async (req, res) => {
-  let weather = await axios.get(
-    "https://api.openweathermap.org/data/2.5/weather",
-    {
-      params: {
-        lat: req.query.lat,
-        lon: req.query.lon
-      }
+  let weather = await instance.get("/weather", {
+    params: {
+      lat: req.query.lat,
+      lon: req.query.lon
     }
-  );
+  });
   res.send(weather.data);
 });
 

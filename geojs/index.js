@@ -9,9 +9,14 @@ const HOST = "0.0.0.0";
 
 // App
 const app = express();
+
+var instance = axios.create({
+  baseURL: "https://get.geojs.io/v1"
+});
+
 app.get("/", async (req, res, next) => {
   try {
-    let geo = await axios.get("https://get.geojs.io/v1/ip/geo.json", {
+    let geo = await instance.get("/ip/geo.json", {
       params: {
         ip: req.query.ip
       }
