@@ -11,8 +11,9 @@ const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
 // App
 const app = express();
 app.get("/", async (req, res) => {
-  let weather_data = await axios.get(`api.openweathermap.org/data/2.5/weather?lat=${req.query.lat}&lon=${req.query.lon}&appid=${OPENWEATHER_API_KEY}`);
-  res.send(weather_data);
+  console.log(req);
+  let weather = await axios.get(`api.openweathermap.org/data/2.5/weather?lat=${req.query.lat}&lon=${req.query.lon}&appid=${OPENWEATHER_API_KEY}`);
+  res.send(weather.data);
 });
 
 app.get("/healthz", (req, res) => {
