@@ -1,6 +1,7 @@
 "use strict";
 
 const axios = require("axios");
+const axiosLogger = require("axios-logger");
 const express = require("express");
 require('express-async-errors');
 
@@ -12,13 +13,15 @@ const OPENWEATHERMAP_SERVICE_HOST = process.env.OPENWEATHERMAP_SERVICE_HOST;
 
 // App
 const app = express();
+const instance = axios.create();
+instance.interceptors.request.use(axiosLogger.requestLogger, axiosLogger.errorLogger);
 
 app.get("/", async (req, res, next) => {
   try {
-    let geo_res = await axios.get(GEOJS_SERVICE_HOST, {
+    let geo_res = await instance.get(GEOJS_SERVICE_HOST, {
       params: { ip: req.header("x-forwarded-for") }
     });
-    let weather_res = await axios.get(OPENWEATHERMAP_SERVICE_HOST, {
+    let weather_res = await instance.get(OPENWEATHERMAP_SERVICE_HOST, {
       params: {
         lat: geo_res.data.latitude,
         lon: geo_res.data.longitude
