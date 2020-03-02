@@ -39,9 +39,7 @@ app.get("/healthz", (req, res) => {
 
 // Catch-all for undefined routes
 app.get("*", function(req, res, next) {
-  let err = new Error(
-    `${req.header("x-forwarded-for")} tried to reach ${req.originalUrl}`
-  );
+  let err = new Error(`${req.ip} tried to reach ${req.originalUrl}`);
   err.statusCode = 404;
   next(err);
 });
