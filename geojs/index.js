@@ -1,3 +1,7 @@
+/*
+ * Client proxy for GeoJS.
+ */
+
 "use strict";
 
 const axios = require("axios");
@@ -16,6 +20,10 @@ const instance = axios.create({
   baseURL: "https://get.geojs.io/v1"
 });
 
+/*
+ * Use Geo endpoint to get geographical information about IP.
+ * https://www.geojs.io/docs/v1/endpoints/geo/
+ */
 app.get("/", async (req, res, next) => {
   try {
     let geo_res = await instance.get(`/ip/geo/${req.query.ip}.json`);

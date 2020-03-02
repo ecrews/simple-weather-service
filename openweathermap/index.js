@@ -1,3 +1,7 @@
+/*
+ * Client proxy for OpenWeatherMap.
+ */
+
 "use strict";
 
 const axios = require("axios");
@@ -17,12 +21,20 @@ const instance = axios.create({
   baseURL: "https://api.openweathermap.org/data/2.5"
 });
 
-// Append API key to query params for each request
+/*
+ * Append API key to query params for each request.
+ * https://openweathermap.org/appid#use
+ */
 instance.interceptors.request.use(function(config) {
   config.params.appid = API_KEY;
   return config;
 });
 
+/*
+ * Use Weather endpoint to get current weather data for location by
+ * geographical coordinates.
+ * https://openweathermap.org/current#geo
+ */
 app.get("/", async (req, res, next) => {
   try {
     let weather_res = await instance.get("/weather", {
