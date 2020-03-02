@@ -12,12 +12,13 @@ const OPENWEATHERMAP_SERVICE_HOST = process.env.OPENWEATHERMAP_SERVICE_HOST;
 
 // App
 const app = express();
+app.set("trust proxy", true);
 const instance = axios.create();
 
 app.get("/", async (req, res, next) => {
   try {
     let geo_res = await instance.get(GEOJS_SERVICE_HOST, {
-      params: { ip: req.header("x-forwarded-for") }
+      params: { ip: req.ip }
     });
     let weather_res = await instance.get(OPENWEATHERMAP_SERVICE_HOST, {
       params: {
@@ -37,9 +38,7 @@ app.get("/healthz", (req, res) => {
 
 // Catch-all for undefined routes
 app.get("*", function(req, res, next) {
-  let err = new Error(
-    `${req.header("x-forwarded-for")} tried to reach ${req.originalUrl}`
-  );
+  let err = new Error(`${req.ip} tried to reach ${req.originalUrl}`);
   err.statusCode = 404;
   next(err);
 });
