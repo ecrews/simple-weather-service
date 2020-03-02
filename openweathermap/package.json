@@ -1,5 +1,5 @@
 {
-  "name": "weather",
+  "name": "openweathermap",
   "version": "0.1.0",
   "description": "Ambassador to OpenWeatherMap API",
   "main": "index.js",
